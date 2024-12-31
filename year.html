@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate New Year Celebration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            background-size: 400% 400%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            animation: gradientShift 30s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background: linear-gradient(45deg, #2c3e50, #3498db); }
+            25% { background: linear-gradient(45deg, #8e44ad, #f39c12); }
+            50% { background: linear-gradient(45deg, #ff0000, #ff1493); }
+            75% { background: linear-gradient(45deg, #1e1e1e, #ff6347); }
+            100% { background: linear-gradient(45deg, #2c3e50, #3498db); }
+        }
+
+        h1 {
+            font-size: 6rem;
+            text-transform: uppercase;
+            text-align: center;
+            animation: sparkleText 4s ease-in-out infinite alternate, floatText 2s ease-in-out infinite, bounceText 1s ease-in-out infinite;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px white, 0 0 20px #f39c12, 0 0 30px #f39c12, 0 0 40px #ff00ff, 0 0 60px #ff00ff, 0 0 80px #ff00ff;
+        }
+
+        @keyframes sparkleText {
+            0% { text-shadow: 0 0 10px white, 0 0 20px #f39c12, 0 0 30px #f39c12, 0 0 40px #ff00ff, 0 0 60px #ff00ff, 0 0 80px #ff00ff; }
+            100% { text-shadow: 0 0 10px white, 0 0 20px #ff5733, 0 0 30px #ff5733, 0 0 40px #ff1493, 0 0 60px #ff1493, 0 0 80px #ff1493; }
+        }
+
+        @keyframes floatText {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: random;
+            animation: confettiFall 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% { opacity: 0; transform: translateY(-50px) rotate(0deg); }
+            100% { opacity: 1; transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: white;
+            border-radius: 50%;
+            animation: fireworkExplosion 1s ease-out;
+        }
+
+        @keyframes fireworkExplosion {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(10); opacity: 0; }
+        }
+
+        .fireworkParticle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+            animation: fireworkParticles 2s ease-out;
+        }
+
+        @keyframes fireworkParticles {
+            0% { transform: scale(1) translate(0, 0); opacity: 1; }
+            100% { transform: scale(0.1) translate(var(--x), var(--y)); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy New Year!</h1>
+    <script>
+        // Create Twinkling Stars
+        function createStars() {
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                document.body.appendChild(star);
+            }
+        }
+
+        // Create Confetti Particles
+        function createConfetti() {
+            for (let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Random color generator for confetti
+        function getRandomColor() {
+            const colors = ['#FF5733', '#FF8D1A', '#33FF57', '#33CFFF', '#FF33F6', '#FFC733'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Fireworks Effect
+        function createFireworks() {
+            setInterval(() => {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.left = Math.random() * 100 + 'vw';
+                firework.style.top = Math.random() * 100 + 'vh';
+                firework.style.backgroundColor = getRandomColor();
+                document.body.appendChild(firework);
+
+                setTimeout(() => {
+                    firework.remove();
+                    createFireworkParticles(firework.style.left, firework.style.top);
+                }, 1000);
+            }, 1000);
+        }
+
+        // Firework Particles Explosion
+        function createFireworkParticles(x, y) {
+            const numParticles = 30;
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('fireworkParticle');
+                const angle = Math.random() * 2 * Math.PI;
+                const speed = Math.random() * 4 + 2;
+                const distanceX = Math.cos(angle) * speed;
+                const distanceY = Math.sin(angle) * speed;
+                particle.style.setProperty('--x', `${distanceX}vw`);
+                particle.style.setProperty('--y', `${distanceY}vh`);
+                particle.style.left = x;
+                particle.style.top = y;
+                particle.style.animationDuration = `${Math.random() * 1 + 1}s`;
+                document.body.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 2000);
+            }
+        }
+
+        // Add background sound
+        const audio = new Audio('https://www.soundjay.com/button/beep-07.wav'); // Add your celebratory sound here
+        audio.loop = true;
+        audio.play();
+
+        // Initialize the animation effects
+        createStars();
+        createConfetti();
+        createFireworks();
+    </script>
+</body>
+</html>
+
